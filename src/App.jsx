@@ -1,50 +1,43 @@
 import { useState } from 'react'
+import Layout from './components/ui/Layout'
+import Dashboard from './pages/Dashboard'
 import SideBar from './components/navbars/SideBar'
-import HeaderBar from './components/navbars/HeaderBar'
-import Index from './components/ui/Layout'
-
-import Hero from './components/dashboard/Hero'
-import DashCardSmall from './components/dashboard/DashCardSmall'
-
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+import Employee from './pages/employee'
+import Dispositions from './pages/Dispositions'
+import CouponCode from './pages/CouponCode'
+import CourseList from './pages/CourseList'
+import EmailCampaign from './pages/EmailCampaign'
+import Sales from './pages/Sales'
+import Attendance from './pages/Attendance'
 
 
 function App() {
  
-   let cardDetail=[{
-    digits:2000,
-    title:"total user"
-   },
-  {
-    digits:2000,
-    title:"Active user"
-   },
-  {
-    digits:2000,
-    title:"total courses"
-   },
-  {
-    digits:2000,
-    title:"revenue"
-   }]
+   
 
   return (
     <>
-       <Index />
-       <div className='absolute top-[15%] left-[23%] pr-7 bg-[#F6F6F6] '>
-          <Hero></Hero>
+    <BrowserRouter>
+    <Layout/>
+      
+       <div className='absolute top-[80px] left-[21%] pr-7 pl-5 pt-5 h-[calc(100vh-80px)] pb-10 overflow-y-auto bg-[#F6F6F6] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
+      <Routes>
+      <Route path='/' element={<Dashboard></Dashboard>}></Route>
 
-          <div className="overveiw mt-10">
-            <h1 className='my-10 font-bold text-2xl '>over view</h1>
-            <div className="cards flex gap-2">
-                       {
-                        cardDetail.map((obj)=><DashCardSmall {...obj}></DashCardSmall>)
-                        }
-            </div>
-         
-          </div>
-        
+      <Route path='/employee' element={<Employee></Employee> }></Route>
+      <Route path='/dashboard'element={<Dashboard></Dashboard> }></Route>
+      <Route path='/dispositions'element={<Dispositions></Dispositions>}></Route>
+      <Route path='/couponcode'element={<CouponCode></CouponCode>}></Route>
+      <Route path='/courselist'element={<CourseList></CourseList>}></Route>
+      <Route path='/emailcampaign'element={<EmailCampaign></EmailCampaign>}></Route>
+      <Route path='/sales'element={<Sales></Sales>}></Route>
+      <Route path='attendance'element={<Attendance></Attendance>}></Route>
+  
+      </Routes>
        </div>
-
+    </BrowserRouter>
+       
     </>
   )
 }

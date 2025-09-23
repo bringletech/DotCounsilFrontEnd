@@ -7,7 +7,7 @@ const DashCardSmall = (obj) => {
       {/* Top Section */}
       <div className="flex justify-between items-start">
         <h3 className="text-lg text-black font-bold">{obj.title}</h3>
-        <FaBeer className="w-6 h-6 text-blue-500" />
+        {obj.icon}
       </div>
 
       {/* Bottom Section */}

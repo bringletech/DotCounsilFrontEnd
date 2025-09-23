@@ -6,7 +6,7 @@ import HeaderBar from '../navbars/HeaderBar'
 function Layout() {
   return (
     <>
-    <div className="mainContainer w-screen max-h-screen bg-white flex ">
+    <div className="mainContainer w-screen max-h-screen bg-white flex fixed ">
         <div className="w-[27%] h-full">
              <SideBar></SideBar>
         </div>

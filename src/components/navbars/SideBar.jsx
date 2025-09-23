@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink,Link} from 'react-router-dom';
 // import "../../index.css" 
 import {
   User,Settings,Mail,Ticket,ShoppingCart,Calendar,
@@ -10,14 +11,14 @@ import { FaList } from "react-icons/fa";
 function SideBar() {
   // menu items array
   const menuItems = [
-    { icon: AiFillDashboard, label: "Dashboard" },
-    { icon: User, label: "Employees" },
-    { icon: Settings, label: "My Dispositions" },
-    { icon: Mail, label: "Email Campaign" },
-    { icon: FaList, label: "Course List" },
-    { icon: Ticket, label: "Coupon Code" },
-    { icon: ShoppingCart, label: "Sales" },
-    { icon: Calendar, label: "My Attendance" },
+    { icon: AiFillDashboard, label: "Dashboard" ,link:"/dashboard"},
+    { icon: User, label: "Employees",link:"/employee" },
+    { icon: Settings, label: "My Dispositions",link:"/dispositions" },
+    { icon: Mail, label: "Email Campaign",link:"/emailcampaign" },
+    { icon: FaList, label: "Course List",link:"/courselist" },
+    { icon: Ticket, label: "Coupon Code",link:"/couponcode"},
+    { icon: ShoppingCart, label: "Sales",link:"/sales" },
+    { icon: Calendar, label: "My Attendance",link:"/attendance" },
   ];
 
   return (
@@ -31,7 +32,8 @@ function SideBar() {
         {/* Links */}
         <div className="links mb-5 flex flex-col gap-3 mt-4 overflow-y-scroll [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {menuItems.map((item, index) => (
-            <div
+            <NavLink to={item.link} className={({isActive})=>isActive?"bg-[#1E40AF] text-white": "bg-[#F0F7FF] text-black" }>
+                   <div
               key={index}
               className="flex items-center gap-3 px-4 py-3 hover:bg-[#1E40AF] hover:text-white cursor-pointer"
             >
@@ -40,6 +42,8 @@ function SideBar() {
                 <b>{item.label}</b>
               </span>
             </div>
+            </NavLink>
+           
           ))}
 
         </div>
