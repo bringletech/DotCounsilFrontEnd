@@ -21,7 +21,7 @@ function App() {
     <BrowserRouter>
     <Layout/>
       
-       <div className='absolute top-[80px] left-[21%] pr-7 pl-5 pt-5 h-[calc(100vh-80px)] pb-10 overflow-y-auto bg-[#F6F6F6] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
+       <div className='absolute w-[79%]  top-[80px] left-[21%] pr-13 pl-5 pt-5 h-[calc(100vh-80px)] pb-10 overflow-y-auto bg-[#F6F6F6] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden'>
       <Routes>
       <Route path='/' element={<Dashboard></Dashboard>}></Route>
 

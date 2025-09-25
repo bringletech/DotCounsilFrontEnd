@@ -35,7 +35,7 @@ function SideBar() {
             <NavLink to={item.link} className={({isActive})=>isActive?"bg-[#1E40AF] text-white": "bg-[#F0F7FF] text-black" }>
                    <div
               key={index}
-              className="flex items-center gap-3 px-4 py-3 hover:bg-[#1E40AF] hover:text-white cursor-pointer"
+              className="flex items-center gap-3 px-4 py-3 hover:bg-[#637fdb] hover:text-white cursor-pointer"
             >
               <item.icon size={20} />
               <span className="">
