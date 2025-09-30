@@ -85,6 +85,24 @@ export const dummyCourses = [
   },
 ];
 
+ export const RevenueData = [
+  {
+    name: "Revenue",
+    
+    data: [1200, 1500, 1700, 2000, 1800, 2200, 2500],
+  },
+  {
+    name: "Projected",
+    
+    data: [800, 1200, 1400, 1600, 1800, 2000, 2300],
+  },
+  {
+    name: "Enrollments",
+    
+    data: [500, 900, 1300, 1500, 1700, 1900, 2100],
+  },
+];
+
 const colors=["#1E40AF","#30C93B","#E2C044"];
 
 export const barData = {
@@ -101,6 +119,19 @@ export const barData = {
   })),
 };
 
+export const RevenueBarData = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "June"],
+  datasets: RevenueData.map((c, idx) => ({
+    label: c.name,
+    data: c.data,
+    backgroundColor: colors[idx],
+    barThickness: 8,
+    barPercentage: 1,
+    categoryPercentage: 0.1,
+    borderRadius: [6, 6, 6, 6],
+    maxBarThickness: 21,
+  })),
+};
 export const options = {
     responsive: true,
     maintainAspectRatio: false, 
@@ -180,6 +211,25 @@ const values = [2500, 2000, 1800];
     label: c,
       data: [values[idx]], // har ek course ki value
       backgroundColor: ProgColors[idx], // alag-alag color
+      borderRadius: 6,
+      maxBarThickness: 12, // mota bar
+      categoryPercentage:1.4,
+      barPercentage: 0.8,
+    }))
+    
+  };
+
+  //analysis page conversion funnel progress bar data 
+  const convColors = ["#1E40AF", "#30C93B", "#E2C044"];
+const convAry = ["Leads", "Signup", "Enrollments"];
+const convValues = [2500, 2000, 1800];
+
+ export const convProgressBarData = {
+  labels: ["leads", "signup", "enrollments"], // y-axis pe ye dikhega
+  datasets: convAry.map((c,idx)=>({
+    label: c,
+      data: [convValues[idx]], // har ek course ki value
+      backgroundColor: convColors[idx], // alag-alag color
       borderRadius: 6,
       maxBarThickness: 12, // mota bar
       categoryPercentage:1.4,

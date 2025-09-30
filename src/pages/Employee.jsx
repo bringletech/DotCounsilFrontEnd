@@ -21,8 +21,6 @@ const employees = [
 
   ];
   
-  
-  
   function Employee() {
     const onClose=()=>{
     setIsOpen(false);
