@@ -1,12 +1,12 @@
-import React from 'react'
-import Stepper from '../components/courses/Stepper'
+import React from "react";
+import Stepper from "../components/courses/Stepper";
 
 function CreateCourse() {
   return (
     <>
-    <Stepper></Stepper>
+      <Stepper></Stepper>
     </>
-  )
+  );
 }
 
-export default CreateCourse
+export default CreateCourse;

@@ -2,7 +2,7 @@ import React from 'react'
 import Login from "../components/Login";
 
 
-function AdminLogin() {
+function AdminLogin({data}) {
   return (
     <>
        <Login></Login>
