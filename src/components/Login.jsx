@@ -1,12 +1,32 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({setIsAuthenticated}) => {
+  let navigate=useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit =async (e) => {
     e.preventDefault();
-    alert(`Email: ${email}\nPassword: ${password}`);
+    // alert(`Email: ${email}\nPassword: ${password}`);
+    let url="https://api.dotcouncil.org/api/v1/superAdmin/loginAdmin";
+    try{
+      let resp= await axios.post(url,{email,password},{headers:{ "Content-Type": "application/json"}})
+      if(resp.data.success){
+        alert(resp.data.message);
+        let token=resp.data.data.accessToken;
+        localStorage.setItem("accessToken",token);
+
+        console.log(token);
+        setIsAuthenticated(true);
+        navigate("/dashboard", { replace: true });
+
+        
+      }
+    }catch(err){
+      alert("login failed! error:",err.message);
+    }
   };
 
   return (
@@ -36,7 +56,7 @@ const Login = () => {
               required
             />
           </div>
-          <button
+          <button 
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
           >

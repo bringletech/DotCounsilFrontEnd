@@ -1,7 +1,7 @@
 import React from 'react'
 import Hero from '../components/dashboard/Hero'
 import DashCardContainer from '../components/dashboard/DashCardContainer'
-import ChartCard from '../util/chart-config'
+import ChartCard from '../utils/chart-config'
 import { lineData,RevenueBarData,barData,progressBarData,options,progressBarOptions,convProgressBarData } from '../constants/constants'
 import FilterExportCard from '../components/analytics/Filterexports'
 

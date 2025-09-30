@@ -1,6 +1,6 @@
 import React from 'react'
 import Hero from '../components/dashboard/Hero';
-import ChartCard from '../util/chart-config';
+import ChartCard from '../utils/chart-config';
 import QuickActionsCard from '../components/dashboard/QuickActionsCard';
 import DashCardContainer from '../components/dashboard/DashCardContainer';
 import { lineData,barData,doughnutData,progressBarData,options,progressBarOptions } from '../constants/constants';
