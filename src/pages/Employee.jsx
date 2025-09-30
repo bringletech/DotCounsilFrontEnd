@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Employee_Header from '../components/employee/Employee_Header'
+import SubHeader from '../components/shared/SubHeader'
 import Table from '../components/employee/Table';
 import Modal from '../components/shared/Modal';
 import Add_Emp_Form from '../components/employee/Add_Emp_Form';
@@ -34,7 +34,7 @@ const employees = [
   return (
    <>
   <div>
-     <Employee_Header openModal={openModal}></Employee_Header>
+     <SubHeader openModal={openModal} heading={"Manage Employees"} subHeading={"Manage Your Sales Team And Track Their Performance"} btnTxt={"+Add Employee"} ></SubHeader>
 <div className='mt-10'>
 
      <Table columns={columns} data={employees} />

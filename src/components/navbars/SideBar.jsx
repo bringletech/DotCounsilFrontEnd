@@ -1,25 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import {NavLink,Link} from 'react-router-dom';
 // import "../../index.css" 
-import {
-  User,Settings,Mail,Ticket,ShoppingCart,Calendar,
-} from "lucide-react";
-import { AiFillDashboard} from "react-icons/ai";
-import { FaList } from "react-icons/fa";
+import { MdOutlineLightMode } from "react-icons/md";
+import { MdDarkMode } from "react-icons/md";
+import { menuItems } from "../../constants/constants";
 
 
 function SideBar() {
-  // menu items array
-  const menuItems = [
-    { icon: AiFillDashboard, label: "Dashboard" ,link:"/dashboard"},
-    { icon: User, label: "Employees",link:"/employee" },
-    { icon: Settings, label: "My Dispositions",link:"/dispositions" },
-    { icon: Mail, label: "Email Campaign",link:"/emailcampaign" },
-    { icon: FaList, label: "Course List",link:"/courselist" },
-    { icon: Ticket, label: "Coupon Code",link:"/couponcode"},
-    { icon: ShoppingCart, label: "Sales",link:"/sales" },
-    { icon: Calendar, label: "My Attendance",link:"/attendance" },
-  ];
+  const [isDark,setIsDark]=useState(true);
+ 
 
   return (
     <>
@@ -47,10 +36,13 @@ function SideBar() {
           ))}
 
         </div>
-        <div className="logout-btn flex justify-center ">
-            <button className="bg-[#1E40AF] w-[150px] h-[40px] text-white rounded-sm m-auto">
+        <div  className="logout-btn flex justify-center  ">
+            {/* <button className="bg-[#1E40AF] w-[150px] h-[40px] text-white rounded-sm m-auto">
                 logout
-            </button>
+            </button> */}
+            {isDark?
+            <MdDarkMode size={30} ></MdDarkMode>
+          :<MdOutlineLightMode size={30}></MdOutlineLightMode>}
           </div>
       </div>
     </>
