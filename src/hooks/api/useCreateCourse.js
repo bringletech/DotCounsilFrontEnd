@@ -14,7 +14,7 @@ export function useCreateCourse() {
         console.log("env var:", base);
         if (!base) throw new Error("VITE_API_URI is not set");
 
-        const url = `${base}/course/createCourse`;
+        const url = `${base}/api/v1/course/createCourse`;
         const normalizedStatus = (status || "").toUpperCase();
         const allowed = ["PAID", "FREE", "COMING_SOON"];
         if (!allowed.includes(normalizedStatus)) {

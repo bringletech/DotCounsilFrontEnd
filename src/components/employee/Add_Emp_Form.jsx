@@ -1,133 +1,183 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import useCreateAdmin from "../../hooks/api/useCreateAdmin";
+const Add_Emp_Form = () => {
+  const { createAdmin, loading, error, success } = useCreateAdmin();
 
-function Add_Emp_Form({onClose}) {
-    const [formData,setFormData]=useState({
-    fullName: "",
+  const [formData, setFormData] = useState({
+    username: "",
     email: "",
-    address: "",
-    role: "",
-    status: "active",
-    leadAssign: 0,
-    })
+    password: "",
+    adminType: "ADMIN",
+    hasEmployeeRole: true,
+    employeeDetails: {
+      employeeId: "",
+      name: "",
+      department: "",
+      designation: "",
+      joiningDate: "",
+      salary: "",
+    },
+  });
 
-    const handleChange=(e)=>{
-        let name=e.target.name;
-        let val=e.target.value;
-        setFormData({...formData,[name]:val})
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Check if field is inside employeeDetails
+    if (name in formData.employeeDetails) {
+      setFormData({
+        ...formData,
+        employeeDetails: {
+          ...formData.employeeDetails,
+          [name]: value,
+        },
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
     }
-    const handleSubmit=(e)=>{
-        e.preventDefault();
-        console.log(formData);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Convert salary to string
+    const payload = {
+      ...formData,
+      employeeDetails: {
+        ...formData.employeeDetails,
+        salary: String(formData.employeeDetails.salary),
+      },
+    };
+
+    try {
+      const res = await createAdmin(payload);
+      console.log("Admin created:", res);
+    } catch (err) {
+      console.error("Create admin error:", err);
     }
-    
+  };
+
   return (
-    <>
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-xl mx-auto bg-white p-8 rounded shadow space-y-4"
+    >
+      <h2 className="text-xl font-bold mb-4">Create Admin</h2>
 
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-
-            <div className='space-y-1'>
-                <label htmlFor="fullName" className="block font-medium text-gray-700">
-               full name 
-              </label>
-               <input
+      <input
         type="text"
-        name="fullName"
-        placeholder="Full Name"
-        value={formData.fullName}
+        name="username"
+        placeholder="Username"
+        value={formData.username}
         onChange={handleChange}
-        className="w-full border p-2 rounded"
+        className="border p-2 rounded w-full"
         required
       />
-
-            </div>
-     
-      <div className="space-y-1">
-        <label htmlFor="fullName" className="block font-medium text-gray-700">
-               Email Address
-              </label>
-        
-         <input
+      <input
         type="email"
         name="email"
-        placeholder="Email Address"
+        placeholder="Email"
         value={formData.email}
         onChange={handleChange}
-        className="w-full border p-2 rounded"
+        className="border p-2 rounded w-full"
         required
       />
-      </div>
-     
-      <div className="space-y-1">
-        <label htmlFor="role" className="block font-medium text-gray-700">
-               Role
-              </label>
-
-          <select
-        name="role"
-        value={formData.role}
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
         onChange={handleChange}
-        className="w-full border p-2 rounded"
+        className="border p-2 rounded w-full"
         required
-      >
-        <option value="">Select Role</option>
-        <option value="Admin">Admin</option>
-        <option value="Manager">Manager</option>
-        <option value="Employee">Employee</option>
-      </select>     
-     </div>
-     
-     <div className="space-y-1">
-        <label htmlFor="status" className="block font-medium text-gray-700">
-               Status
-              </label>
-         <select
-        name="status"
-        value={formData.status}
+      />
+      <input
+        type="text"
+        name="adminType"
+        placeholder="Admin Type"
+        value={formData.adminType}
         onChange={handleChange}
-        className="w-full border p-2 rounded"
-      >
-        <option value="Active">Active</option>
-        <option value="Inactive">Inactive</option>
-      </select>     
-              </div>
-      
-<div className="space-y-1">
-        <label htmlFor="leadAssign" className="block font-medium text-gray-700">
-               Lead Assigned
-              </label>
+        className="border p-2 rounded w-full"
+        required
+      />
+      <label className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          name="hasEmployeeRole"
+          checked={formData.hasEmployeeRole}
+          onChange={(e) =>
+            setFormData({ ...formData, hasEmployeeRole: e.target.checked })
+          }
+        />
+        Has Employee Role
+      </label>
 
-         <input
+      <h3 className="font-semibold mt-4">Employee Details</h3>
+      <input
+        type="text"
+        name="employeeId"
+        placeholder="Employee ID"
+        value={formData.employeeDetails.employeeId}
+        onChange={handleChange}
+        className="border p-2 rounded w-full"
+      />
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={formData.employeeDetails.name}
+        onChange={handleChange}
+        className="border p-2 rounded w-full"
+      />
+      <input
+        type="text"
+        name="department"
+        placeholder="Department"
+        value={formData.employeeDetails.department}
+        onChange={handleChange}
+        className="border p-2 rounded w-full"
+      />
+      <input
+        type="text"
+        name="designation"
+        placeholder="Designation"
+        value={formData.employeeDetails.designation}
+        onChange={handleChange}
+        className="border p-2 rounded w-full"
+      />
+      <input
+        type="date"
+        name="joiningDate"
+        placeholder="Joining Date"
+        value={formData.employeeDetails.joiningDate}
+        onChange={handleChange}
+        className="border p-2 rounded w-full"
+      />
+      <input
         type="number"
-        name="leadAssign"
-        placeholder="Lead Assign"
-        value={formData.leadAssign}
+        name="salary"
+        placeholder="Salary"
+        value={formData.employeeDetails.salary}
         onChange={handleChange}
-        className="w-full border p-2 rounded"
-      />      
-     </div>         
-     
+        className="border p-2 rounded w-full"
+      />
 
-      {/* Buttons */}
-      <div className="flex justify-end gap-3">
-        <button
-          type="button"
-          onClick={onClose}
-          className="px-4 py-2 bg-gray-300 rounded"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded"
-        >
-          Add Employee
-        </button>
-      </div>
+      <button
+        type="submit"
+        disabled={loading}
+        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+      >
+        {loading ? "Creating..." : "Create Admin"}
+      </button>
+
+      {error && <p className="text-red-500 mt-2">{error.message}</p>}
+      {success && (
+        <p className="text-green-500 mt-2">Admin created successfully!</p>
+      )}
     </form>
-    
-    </>
-  )
-}
+  );
+};
 
-export default Add_Emp_Form
+export default Add_Emp_Form;

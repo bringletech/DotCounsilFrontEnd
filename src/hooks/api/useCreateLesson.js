@@ -14,7 +14,7 @@ export function useCreateLesson() {
       if (!base) throw new Error('VITE_API_URI is not set');
       if (!moduleId) throw new Error('moduleId is required to create a lesson');
 
-      const url = `${base}/lesson/createLesson/${moduleId}`;
+      const url = `${base}/api/v1/lesson/createLesson/${moduleId}`;
       const formData = new FormData();
       if (title != null) formData.append('title', title);
       if (description != null) formData.append('description', description);
