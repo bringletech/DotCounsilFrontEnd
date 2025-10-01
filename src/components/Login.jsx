@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({setIsAuthenticated}) => {
@@ -9,15 +10,14 @@ const Login = ({setIsAuthenticated}) => {
 
   const handleSubmit =async (e) => {
     e.preventDefault();
-    // alert(`Email: ${email}\nPassword: ${password}`);
-    let url="https://api.dotcouncil.org/api/v1/superAdmin/loginAdmin";
+    
     try{
-      let resp= await axios.post(url,{email,password},{headers:{ "Content-Type": "application/json"}})
+      let resp= await axiosInstance.post('/api/v1/superAdmin/loginAdmin',{email,password})
       if(resp.data.success){
         alert(resp.data.message);
         let token=resp.data.data.accessToken;
         localStorage.setItem("accessToken",token);
-
+        console.log("vite url:",import.meta.env.VITE_API_URL);
         console.log(token);
         setIsAuthenticated(true);
         navigate("/dashboard", { replace: true });
