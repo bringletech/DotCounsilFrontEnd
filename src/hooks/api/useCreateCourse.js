@@ -11,6 +11,7 @@ export function useCreateCourse() {
 
       try {
         const base = (import.meta.env.VITE_API_URI || "").replace(/\/$/, "");
+        console.log("env var:", base);
         if (!base) throw new Error("VITE_API_URI is not set");
 
         const url = `${base}/course/createCourse`;
@@ -18,7 +19,9 @@ export function useCreateCourse() {
         const allowed = ["PAID", "FREE", "COMING_SOON"];
         if (!allowed.includes(normalizedStatus)) {
           throw new Error(
-            `Invalid status. Expected one of ${allowed.join(", ")}, received '${status ?? ''}'`
+            `Invalid status. Expected one of ${allowed.join(", ")}, received '${
+              status ?? ""
+            }'`
           );
         }
         const res = await fetch(url, {
