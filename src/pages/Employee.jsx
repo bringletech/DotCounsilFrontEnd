@@ -3,12 +3,13 @@ import SubHeader from '../components/shared/SubHeader'
 import Table from '../components/employee/Table';
 import Modal from '../components/shared/Modal';
 import Add_Emp_Form from '../components/employee/Add_Emp_Form';
+import useGetEmployees from '../hooks/api/useGetEmployees';
 
-const employees = [
-    { id: 1, name: "Tushar Garg", role: "Frontend Developer", email: "tushar@example.com",status:"active",sales:"150"},
-    { id: 2, name: "rishabh mangla", role: "UI/UX Designer", email: "rishabh@example.com",status:"suspended",sales:"150"},
-    { id: 3, name: "Munish Kumar", role: "Backend Developer", email: "munish@example.com", status:"active",sales:"150"},
-  ];
+// const employees = [
+//     { id: 1, name: "Tushar Garg", role: "Frontend Developer", email: "tushar@example.com",status:"active",sales:"150"},
+//     { id: 2, name: "rishabh mangla", role: "UI/UX Designer", email: "rishabh@example.com",status:"suspended",sales:"150"},
+//     { id: 3, name: "Munish Kumar", role: "Backend Developer", email: "munish@example.com", status:"active",sales:"150"},
+//   ];
 
   // ✅ Define columns
   const columns = [
@@ -17,13 +18,14 @@ const employees = [
     { key: "role", label: "Role" },
     { key: "email", label: "Email" },
     { key: "status", label: "Status" },
-    { key: "sales", label: "Total Sales" },
+    { key: "salary", label: "Salary" },
 
   ];
   
-  
-  
   function Employee() {
+ 
+    const { employees, loading, error } = useGetEmployees();
+
     const onClose=()=>{
     setIsOpen(false);
   }
@@ -31,6 +33,8 @@ const employees = [
     setIsOpen(true);
   }
   const [isOpen,setIsOpen]=useState(false);
+   if (loading) return <p>Loading employees...</p>;
+  if (error) return <p>Error loading employees: {error.message}</p>;
   return (
    <>
   <div>

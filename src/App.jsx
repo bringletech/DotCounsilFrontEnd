@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState,useEffect } from "react";
 import Layout from "./components/ui/Layout";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -14,7 +14,16 @@ import AdminLogin from "./pages/AdminLogin";
 import Analytics from "./pages/Analytics";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  //   useEffect(() => {
+  //   // Refresh pe check karo localStorage
+  //   const token = localStorage.getItem("accessToken");
+  //   console.log("app.jsx token :",token)
+  //   if (token) {
+  //     setIsAuthenticated(true);
+  //   }
+  // }, []);
+  console.log("isauth?: ",isAuthenticated)
   return (
     <>
       <BrowserRouter>

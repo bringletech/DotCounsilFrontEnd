@@ -2,10 +2,10 @@ import React from 'react'
 import Login from "../components/Login";
 
 
-function AdminLogin({data}) {
+function AdminLogin({setIsAuthenticated}) {
   return (
     <>
-       <Login></Login>
+       <Login setIsAuthenticated={setIsAuthenticated}></Login>
     </>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import Hero from '../components/dashboard/Hero';
 import ChartCard from '../utils/chart-config';
 import QuickActionsCard from '../components/dashboard/QuickActionsCard';
-// import DashCardContainer from '../components/dashboard/DashCardContainer';
+import DashCardContainer from '../components/dashboard/DashCardContainer';
 import { lineData,barData,doughnutData,progressBarData,options,progressBarOptions } from '../constants/constants';
 
 function Dashboard() {
@@ -15,15 +15,15 @@ function Dashboard() {
           <div className="overveiw mt-10">
             <h1 className='my-10 font-bold text-2xl '>over view</h1>
             
-            {/* <DashCardContainer
-  type="dash"
-  stats={{
-    totalUsers: 2000,
-    activeUsers: 1500,
-    totalCourses: 25,
-    revenue: 50000,
-  }}
-/> */}
+            <DashCardContainer
+              type="dash"
+              stats={{
+              totalUsers: 2000,
+              activeUsers: 1500,
+              totalCourses: 25,
+               revenue: 50000,
+            }}
+           />
 
             <div className='ml-5 mt-5'>
     
