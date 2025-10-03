@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import axiosInstance from "../../utils/axiosInstance";
 export function useCreateCourse() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -10,11 +11,6 @@ export function useCreateCourse() {
       setError(null);
 
       try {
-        const base = (import.meta.env.VITE_API_URI || "").replace(/\/$/, "");
-        console.log("env var:", base);
-        if (!base) throw new Error("VITE_API_URI is not set");
-
-        const url = `${base}/api/v1/course/createCourse`;
         const normalizedStatus = (status || "").toUpperCase();
         const allowed = ["PAID", "FREE", "COMING_SOON"];
         if (!allowed.includes(normalizedStatus)) {
@@ -24,39 +20,28 @@ export function useCreateCourse() {
             }'`
           );
         }
-        const res = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        const response = await axiosInstance.post(
+          "/api/v1/course/createCourse",
+          {
             title,
             description,
             price: normalizedStatus === "PAID" ? Number(price) : 0,
             isPublished: Boolean(isPublished),
             status: normalizedStatus,
-          }),
-        });
-        console.log("Response:", res);
+          }
+        );
 
-        const text = await res.text();
-        let json;
-        try {
-          json = text ? JSON.parse(text) : {};
-        } catch {
-          json = { raw: text };
-        }
-        if (!res.ok) {
-          const msg =
-            json?.message || json?.error || `Request failed: ${res.status}`;
-          throw new Error(msg);
-        }
-
-        setData(json);
-        return json;
+        setData(response.data.data);
+        return response.data.data;
       } catch (err) {
-        setError(err);
-        throw err;
+        const message =
+          err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "Request failed";
+        const normalizedError = new Error(message);
+        setError(normalizedError);
+        throw normalizedError;
       } finally {
         setLoading(false);
       }

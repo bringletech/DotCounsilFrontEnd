@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 // import axios from "axios";
 import axiosInstance from "../utils/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
-const Login = ({setIsAuthenticated}) => {
+const Login = () => {
   let navigate=useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
 
   const handleSubmit =async (e) => {
     e.preventDefault();
@@ -17,12 +19,11 @@ const Login = ({setIsAuthenticated}) => {
         alert(resp.data.message);
         let token=resp.data.data.accessToken;
         localStorage.setItem("accessToken",token);
+        login(resp.data.data.admin);
         console.log("vite url:",import.meta.env.VITE_API_URL);
         console.log(token);
-        setIsAuthenticated(true);
         navigate("/dashboard", { replace: true });
 
-        
       }
     }catch(err){
       alert("login failed! error:",err.message);

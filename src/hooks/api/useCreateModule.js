@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import axiosInstance from "../../utils/axiosInstance";
 
 export function useCreateModule() {
   const [data, setData] = useState(null);
@@ -10,42 +11,29 @@ export function useCreateModule() {
       setLoading(true);
       setError(null);
       try {
-        const base = (import.meta.env.VITE_API_URI || "").replace(/\/$/, "");
-        if (!base) throw new Error("VITE_API_URI is not set");
         if (!courseId)
           throw new Error("courseId is required to create a module");
 
-        const url = `${base}/api/v1/module/createModule/${courseId}`;
-        const res = await fetch(url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
+        const response = await axiosInstance.post(
+          `/api/v1/module/createModule/${courseId}`,
+          {
             title,
             description,
             order: Number(order),
-          }),
-        });
+          }
+        );
 
-        const text = await res.text();
-        let json;
-        try {
-          json = text ? JSON.parse(text) : {};
-        } catch {
-          json = { raw: text };
-        }
-        if (!res.ok) {
-          const msg =
-            json?.message || json?.error || `Request failed: ${res.status}`;
-          throw new Error(msg);
-        }
-
-        setData(json);
-        return json;
+        setData(response.data.data);
+        return response.data.data;
       } catch (err) {
-        setError(err);
-        throw err;
+        const message =
+          err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message ||
+          "Request failed";
+        const normalizedError = new Error(message);
+        setError(normalizedError);
+        throw normalizedError;
       } finally {
         setLoading(false);
       }

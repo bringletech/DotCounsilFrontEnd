@@ -11,6 +11,7 @@ import {
   convProgressBarData,
 } from "../constants/constants";
 import FilterExportCard from "../components/analytics/Filterexports";
+import ChartCard from "../utils/chart-config";
 
 function Analytics() {
   return (

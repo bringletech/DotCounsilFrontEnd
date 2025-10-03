@@ -257,7 +257,7 @@ export const cardDetail = [
   },
   {
     // digits:2000,
-    title: "Active Users",
+    title: "Total Employees",
     icon: VscVmActive,
     iconClass: "w-6 h-6 text-blue-500",
   },

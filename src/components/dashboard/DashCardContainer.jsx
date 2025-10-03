@@ -1,37 +1,43 @@
-import React from 'react'
-import { cardDetail, AnalyticscardDetail} from '../../constants/constants'
-import DashCardSmall from './DashCardSmall'
+import React from 'react';
+import { cardDetail, AnalyticscardDetail } from '../../constants/constants';
+import DashCardSmall from './DashCardSmall';
 
-function 
- DashCardContainer({ type, stats, analysisStats }) {
-  // array select kro type ke hisaab se
-  const cards = type === "dash" ? cardDetail :  AnalyticscardDetail;
+const DASH_CARD_KEYS = {
+  'Total Users': 'totalUsers',
+  'Total Employees': 'totalEmployees',
+  'Total Courses': 'totalCourses',
+  Revenue: 'totalRevenue',
+};
+
+const ANALYTICS_CARD_KEYS = {
+  'Total Revenue': 'TotalRevenue',
+  'Total Enrollment': 'TotalEnrollment',
+  'Completion Rate': 'completionRate',
+  'Avg Revenue User': 'AvgRevenueUser',
+};
+
+function DashCardContainer({ type, stats = {}, analysisStats = {} }) {
+  const cards = type === 'dash' ? cardDetail : AnalyticscardDetail;
 
   return (
     <div className="cards w-full flex gap-2">
       {cards.map((card, idx) => {
         let digits = 0;
 
-        // dashboard condition
-        if (type === "dash") {
-          if (card.title === "Total Users") digits = stats.totalUsers;
-          if (card.title === "Active Users") digits = stats.activeUsers;
-          if (card.title === "Total Courses") digits = stats.totalCourses;
-          if (card.title === "Revenue") digits = stats.revenue;
+        if (type === 'dash') {
+          const key = DASH_CARD_KEYS[card.title];
+          digits = key ? Number(stats[key] ?? 0) : 0;
         }
 
-        // analysis condition
-        if (type === "analysis") {
-          if (card.title === "Total Revenue") digits = analysisStats.TotalRevenue;
-          if (card.title === "Total Enrollment") digits = analysisStats.TotalEnrollment;
-          if (card.title === "Completion Rate") digits = analysisStats.completionRate;
-          if (card.title === "Avg Revenue User") digits = analysisStats.AvgRevenueUser;
+        if (type === 'analysis') {
+          const key = ANALYTICS_CARD_KEYS[card.title];
+          digits = key ? Number(analysisStats[key] ?? 0) : 0;
         }
 
-        return <DashCardSmall key={idx} {...card} digits={digits} />
+        return <DashCardSmall key={idx} {...card} digits={digits} />;
       })}
     </div>
-  )
+  );
 }
 
-export default DashCardContainer
+export default DashCardContainer;

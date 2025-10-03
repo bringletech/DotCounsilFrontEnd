@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Layout from "./components/ui/Layout";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -12,138 +11,31 @@ import CreateCourse from "./pages/CreateCourse";
 import Login from "./components/Login";
 import AdminLogin from "./pages/AdminLogin";
 import Analytics from "./pages/Analytics";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  //   useEffect(() => {
-  //   // Refresh pe check karo localStorage
-  //   const token = localStorage.getItem("accessToken");
-  //   console.log("app.jsx token :",token)
-  //   if (token) {
-  //     setIsAuthenticated(true);
-  //   }
-  // }, []);
-  console.log("isauth?: ", isAuthenticated);
   return (
-    <>
-      <BrowserRouter>
-        {isAuthenticated && <Layout />}
-
-        <div
-          className={`${
-            isAuthenticated
-              ? "absolute w-[79%] bg-[#F6F6F6] text-black top-[80px] left-[21%] pr-13 pl-5 pt-5 h-[calc(100vh-80px)] pb-10 overflow-y-auto  [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              : ""
-          }`}
-        >
-          <Routes>
-            {/* Public Route (Login) */}
-            <Route
-              path="/login"
-              element={<AdminLogin setIsAuthenticated={setIsAuthenticated} />}
-            />
-
-            {/* Protected Routes */}
-            <Route
-              path="/"
-              element={
-                isAuthenticated ? (
-                  <Dashboard />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/employee"
-              element={
-                isAuthenticated ? (
-                  <Employee />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/dashboard"
-              element={
-                isAuthenticated ? (
-                  <Dashboard />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/analytics"
-              element={
-                isAuthenticated ? (
-                  <Analytics />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/couponcode"
-              element={
-                isAuthenticated ? (
-                  <CouponCode />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/courselist"
-              element={
-                isAuthenticated ? (
-                  <CourseList />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/emailcampaign"
-              element={
-                isAuthenticated ? (
-                  <EmailCampaign />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/sales"
-              element={
-                isAuthenticated ? <Sales /> : <Navigate to="/login" replace />
-              }
-            />
-            <Route
-              path="/attendance"
-              element={
-                isAuthenticated ? (
-                  <Attendance />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-            <Route
-              path="/createcourse"
-              element={
-                isAuthenticated ? (
-                  <CreateCourse />
-                ) : (
-                  <Navigate to="/login" replace />
-                )
-              }
-            />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/employee" element={<Employee />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/couponcode" element={<CouponCode />} />
+            <Route path="/courselist" element={<CourseList />} />
+            <Route path="/emailcampaign" element={<EmailCampaign />} />
+            <Route path="/sales" element={<Sales />} />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/createcourse" element={<CreateCourse />} />
+            <Route index element={<Navigate to="/dashboard" replace />} />
+          </Route>
+        </Route>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

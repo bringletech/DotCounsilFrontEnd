@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-
+import axiosInstance from "../../utils/axiosInstance";
 
 export function useCreateLesson() {
   const [data, setData] = useState(null);
@@ -10,11 +10,8 @@ export function useCreateLesson() {
     setLoading(true);
     setError(null);
     try {
-      const base = (import.meta.env.VITE_API_URI || '').replace(/\/$/, '');
-      if (!base) throw new Error('VITE_API_URI is not set');
       if (!moduleId) throw new Error('moduleId is required to create a lesson');
 
-      const url = `${base}/api/v1/lesson/createLesson/${moduleId}`;
       const formData = new FormData();
       if (title != null) formData.append('title', title);
       if (description != null) formData.append('description', description);
@@ -22,24 +19,27 @@ export function useCreateLesson() {
       if (video) formData.append('video', video);
       if (thumbnail) formData.append('thumbnail', thumbnail);
 
-      const res = await fetch(url, {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await axiosInstance.post(
+        `/api/v1/lesson/createLesson/${moduleId}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      const text = await res.text();
-      let json;
-      try { json = text ? JSON.parse(text) : {}; } catch { json = { raw: text }; }
-      if (!res.ok) {
-        const msg = json?.message || json?.error || `Request failed: ${res.status}`;
-        throw new Error(msg);
-      }
-
-      setData(json);
-      return json;
+      setData(response.data.data);
+      return response.data.data;
     } catch (err) {
-      setError(err);
-      throw err;
+      const message =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        err?.message ||
+        'Request failed';
+      const normalizedError = new Error(message);
+      setError(normalizedError);
+      throw normalizedError;
     } finally {
       setLoading(false);
     }

@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import {NavLink,Link} from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import {NavLink,Link, useNavigate} from 'react-router-dom';
 // import "../../index.css" 
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdDarkMode } from "react-icons/md";
 import { menuItems } from "../../constants/constants";
+import { AuthContext } from "../../context/AuthContext";
 
 
 function SideBar() {
-  const [isDark,setIsDark]=useState(true);
- 
+   const {logout } = useContext(AuthContext);
+   const navigate = useNavigate();
 
   return (
     <>
@@ -37,12 +38,17 @@ function SideBar() {
 
         </div>
         <div  className="logout-btn flex justify-center  ">
-            {/* <button className="bg-[#1E40AF] w-[150px] h-[40px] text-white rounded-sm m-auto">
+            <button
+            onClick={()=>{
+              logout();
+              navigate('/login');
+            }}
+            className="bg-[#1E40AF] w-[150px] h-[40px] text-white rounded-sm m-auto">
                 logout
-            </button> */}
-            {isDark?
+            </button>
+            {/* {isDark?
             <MdDarkMode size={30} ></MdDarkMode>
-          :<MdOutlineLightMode size={30}></MdOutlineLightMode>}
+          :<MdOutlineLightMode size={30}></MdOutlineLightMode>} */}
           </div>
       </div>
     </>
