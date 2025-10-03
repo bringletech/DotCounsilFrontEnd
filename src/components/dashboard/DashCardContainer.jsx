@@ -2,7 +2,8 @@ import React from 'react'
 import { cardDetail, AnalyticscardDetail} from '../../constants/constants'
 import DashCardSmall from './DashCardSmall'
 
-function DashCardContainer({ type, stats, analysisStats }) {
+function 
+ DashCardContainer({ type, stats, analysisStats }) {
   // array select kro type ke hisaab se
   const cards = type === "dash" ? cardDetail :  AnalyticscardDetail;
 
