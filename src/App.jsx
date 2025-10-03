@@ -12,6 +12,7 @@ import Login from "./components/Login";
 import AdminLogin from "./pages/AdminLogin";
 import Analytics from "./pages/Analytics";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import UsersTable from "./components/UsersTable";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/sales" element={<Sales />} />
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/createcourse" element={<CreateCourse />} />
+            <Route path="/userstable" element={<UsersTable />} />
             <Route index element={<Navigate to="/dashboard" replace />} />
           </Route>
         </Route>

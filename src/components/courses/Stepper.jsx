@@ -18,7 +18,7 @@ function Stepper() {
   };
 
   return (
-    <div className="w-full  ">
+    <div className="w-full mt-20 ">
       {/* Stepper UI */}
       <div className="relative flex  justify-between  mb-8">
         {/* Background Line */}
@@ -63,12 +63,16 @@ function Stepper() {
       {/* Step Content */}
       <div className="border p-6 rounded bg-white shadow">
         {currentStep === 0 && (
-          <CourseForm onCreated={(c) => setCourseId(c?.id || c?.courseId || c?.data?.id)} />
+          <CourseForm
+            onCreated={(c) => setCourseId(c?.id || c?.courseId || c?.data?.id)}
+          />
         )}
         {currentStep === 1 && (
           <CourseModules
             courseId={courseId}
-            onModuleCreated={(m) => setModuleId(m?.id || m?.moduleId || m?.data?.id)}
+            onModuleCreated={(m) =>
+              setModuleId(m?.id || m?.moduleId || m?.data?.id)
+            }
           />
         )}
         {currentStep === 2 && <CourseLesson moduleId={moduleId} />}

@@ -5,28 +5,34 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
-  let navigate=useNavigate();
+  let navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // ✅ loading state
   const { login } = useContext(AuthContext);
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    try{
-      let resp= await axiosInstance.post('/api/v1/superAdmin/loginAdmin',{email,password})
-      if(resp.data.success){
+    setLoading(true); // start loading
+
+    try {
+      let resp = await axiosInstance.post("/api/v1/superAdmin/loginAdmin", {
+        email,
+        password,
+      });
+      if (resp.data.success) {
         alert(resp.data.message);
-        let token=resp.data.data.accessToken;
-        localStorage.setItem("accessToken",token);
+        let token = resp.data.data.accessToken;
+        localStorage.setItem("accessToken", token);
         login(resp.data.data.admin);
-        console.log("vite url:",import.meta.env.VITE_API_URL);
+        console.log("vite url:", import.meta.env.VITE_API_URL);
         console.log(token);
         navigate("/dashboard", { replace: true });
-
       }
-    }catch(err){
-      alert("login failed! error:",err.message);
+    } catch (err) {
+      alert("login failed! error: " + err.message);
+    } finally {
+      setLoading(false); // stop loading
     }
   };
 
@@ -36,7 +42,9 @@ const Login = () => {
         <h2 className="text-2xl font-bold mb-6 text-center">Admin Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-1 font-medium text-gray-700">Email</label>
+            <label className="block mb-1 font-medium text-gray-700">
+              Email
+            </label>
             <input
               type="email"
               placeholder="admin@example.com"
@@ -47,7 +55,9 @@ const Login = () => {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium text-gray-700">Password</label>
+            <label className="block mb-1 font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
               placeholder="Enter password"
@@ -57,11 +67,16 @@ const Login = () => {
               required
             />
           </div>
-          <button 
+          <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+            disabled={loading} // ✅ disable while loading
+            className={`w-full py-2 rounded transition-colors ${
+              loading
+                ? "bg-gray-400 text-white cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700"
+            }`}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-500 text-center">
