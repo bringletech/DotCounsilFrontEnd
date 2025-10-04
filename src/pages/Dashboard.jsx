@@ -1,19 +1,19 @@
-import React, { useContext, useMemo } from 'react';
-import Hero from '../components/dashboard/Hero';
-import ChartCard from '../utils/chart-config';
-import QuickActionsCard from '../components/dashboard/QuickActionsCard';
-import DashCardContainer from '../components/dashboard/DashCardContainer';
-import useDashboardOverview from '../hooks/api/useDashboardOverview';
-import { AuthContext } from '../context/AuthContext';
+import React, { useContext, useMemo } from "react";
+import Hero from "../components/dashboard/Hero";
+import ChartCard from "../utils/chart-config";
+import QuickActionsCard from "../components/dashboard/QuickActionsCard";
+import DashCardContainer from "../components/dashboard/DashCardContainer";
+import useDashboardOverview from "../hooks/api/useDashboardOverview";
+import { AuthContext } from "../context/AuthContext";
 
-const BASE_COLORS = ['#1E40AF', '#30C93B', '#E2C044', '#F97316', '#6366F1'];
+const BASE_COLORS = ["#1E40AF", "#30C93B", "#E2C044", "#F97316", "#6366F1"];
 
 const defaultChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
       labels: {
         boxWidth: 12,
         boxHeight: 12,
@@ -42,7 +42,7 @@ const createBarOptions = () => ({
 
 const createHorizontalBarOptions = (maxValue = 10) => ({
   ...defaultChartOptions,
-  indexAxis: 'y',
+  indexAxis: "y",
   scales: {
     x: {
       beginAtZero: true,
@@ -57,9 +57,9 @@ const createHorizontalBarOptions = (maxValue = 10) => ({
 });
 
 const formatCurrency = (value) =>
-  new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
     maximumFractionDigits: 0,
   }).format(value);
 
@@ -75,26 +75,26 @@ function Dashboard() {
   };
 
   const revenueChartData = useMemo(() => {
-    const labels = data?.revenueTrends?.map((item) => {
-      const date = new Date(item.date);
-      return date.toLocaleDateString('en-US', {
-        month: 'short',
-        day: 'numeric',
-      });
-    }) ?? [];
+    const labels =
+      data?.revenueTrends?.map((item) => {
+        const date = new Date(item.date);
+        return date.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+        });
+      }) ?? [];
 
-    const datasetData = data?.revenueTrends?.map((item) =>
-      Number(item.revenue ?? 0)
-    ) ?? [];
+    const datasetData =
+      data?.revenueTrends?.map((item) => Number(item.revenue ?? 0)) ?? [];
 
     return {
       labels,
       datasets: [
         {
-          label: 'Revenue',
+          label: "Revenue",
           data: datasetData,
           borderColor: BASE_COLORS[0],
-          backgroundColor: 'rgba(30, 64, 175, 0.3)',
+          backgroundColor: "rgba(30, 64, 175, 0.3)",
           fill: true,
           borderWidth: 1.5,
           pointRadius: 2,
@@ -106,15 +106,14 @@ function Dashboard() {
 
   const enrollmentBarData = useMemo(() => {
     const labels = data?.courseEnrollments?.map((item) => item.month) ?? [];
-    const datasetData = data?.courseEnrollments?.map((item) =>
-      Number(item.count ?? 0)
-    ) ?? [];
+    const datasetData =
+      data?.courseEnrollments?.map((item) => Number(item.count ?? 0)) ?? [];
 
     return {
       labels,
       datasets: [
         {
-          label: 'Enrollments',
+          label: "Enrollments",
           data: datasetData,
           backgroundColor: BASE_COLORS[1],
           borderRadius: 6,
@@ -130,7 +129,7 @@ function Dashboard() {
       newEmployees: 0,
     };
     return {
-      labels: ['New Enrollments', 'New Users', 'New Employees'],
+      labels: ["New Enrollments", "New Users", "New Employees"],
       datasets: [
         {
           data: [recent.newEnrollments, recent.newUsers, recent.newEmployees],
@@ -142,14 +141,14 @@ function Dashboard() {
 
   const topCoursesData = useMemo(() => {
     const courses = data?.topCourses ?? [];
-    const labels = courses.map((course) => course.title ?? 'Untitled');
+    const labels = courses.map((course) => course.title ?? "Untitled");
     const values = courses.map((course) => Number(course.enrollments ?? 0));
 
     return {
       labels,
       datasets: [
         {
-          label: 'Enrollments',
+          label: "Enrollments",
           data: values,
           backgroundColor: labels.map(
             (_, idx) => BASE_COLORS[idx % BASE_COLORS.length]
@@ -165,10 +164,12 @@ function Dashboard() {
   const topCoursesMax = useMemo(() => {
     const courses = data?.topCourses ?? [];
     if (!courses.length) return 10;
-    return Math.max(...courses.map((course) => Number(course.enrollments ?? 0)));
+    return Math.max(
+      ...courses.map((course) => Number(course.enrollments ?? 0))
+    );
   }, [data]);
 
-  const heroName = admin?.username || admin?.name || admin?.email || 'Admin';
+  const heroName = admin?.username || admin?.name || admin?.email || "Admin";
   const formattedRevenue = formatCurrency(stats.totalRevenue || 0);
 
   return (
@@ -234,7 +235,7 @@ function Dashboard() {
                 </div>
               </div>
 
-              <QuickActionsCard title="quick links" />
+              <QuickActionsCard title="quick links :" />
             </>
           )}
         </div>

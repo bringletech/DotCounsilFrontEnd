@@ -1,7 +1,7 @@
 import Layout from "./components/ui/Layout";
 import Dashboard from "./pages/Dashboard";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Employee from "./pages/employee";
+import Employee from "./pages/Employee";
 import CouponCode from "./pages/CouponCode";
 import CourseList from "./pages/CourseList";
 import EmailCampaign from "./pages/EmailCampaign";
@@ -13,6 +13,7 @@ import AdminLogin from "./pages/AdminLogin";
 import Analytics from "./pages/Analytics";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import UsersTable from "./components/UsersTable";
+import Add_Emp_Form from "./components/employee/Add_Emp_Form";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/createcourse" element={<CreateCourse />} />
             <Route path="/userstable" element={<UsersTable />} />
+            <Route path="/add-employee" element={<Add_Emp_Form />} />
             <Route index element={<Navigate to="/dashboard" replace />} />
           </Route>
         </Route>

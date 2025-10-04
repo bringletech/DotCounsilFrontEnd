@@ -13,8 +13,9 @@ export const menuItems = [
   { icon: AiFillDashboard, label: "Dashboard", link: "/dashboard" },
   { icon: User, label: "Employees", link: "/employee" },
   { icon: FaList, label: "Course List", link: "/courselist" },
-  { icon: Settings, label: "Analytics", link: "/analytics" },
   { icon: User, label: "Users", link: "/userstable" },
+
+  { icon: Settings, label: "Analytics", link: "/analytics" },
   // { icon: Ticket, label: "Coupon Code", link: "/couponcode" },
   // { icon: ShoppingCart, label: "Sales", link: "/sales" },
   // { icon: Calendar, label: "My Attendance", link: "/attendance" },

@@ -62,7 +62,7 @@ const Add_Emp_Form = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-xl mx-auto bg-white p-8 rounded shadow space-y-4"
+      className="max-w-xl mx-auto bg-white p-8 rounded shadow space-y-4 "
     >
       <h2 className="text-xl font-bold mb-4">Create Admin</h2>
 

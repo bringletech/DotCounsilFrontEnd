@@ -19,7 +19,7 @@ function Layout({ link, title }) {
         ) : (
           <HeaderBar title={title ?? "Dashboard"} link={link ?? null} />
         )}
-        <div className="flex-1 overflow-y-auto bg-[#F3F4F6] p-6">
+        <div className="flex-1 overflow-y-auto bg-[#F3F4F6] p-6 mt-20">
           <Outlet />
         </div>
       </section>
