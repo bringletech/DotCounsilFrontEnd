@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import CourseForm from "../../components/courses/CourseForm";
 import CourseModules from "../../components/courses/CourseModules";
 import CourseLesson from "../../components/courses/CourseLesson";
+import CourseQuizzes from "./CourseQuizzes";
+import CourseReview from "./CourseReview";
 const steps = ["CreateCourse", "Modules", "Lessons", "Quiz", "Review"];
 
 function Stepper() {
@@ -76,8 +78,8 @@ function Stepper() {
           />
         )}
         {currentStep === 2 && <CourseLesson moduleId={moduleId} />}
-        {currentStep === 3 && <Quiz />}
-        {currentStep === 4 && <Review />}
+        {currentStep === 3 && <CourseQuizzes />}
+        {currentStep === 4 && <CourseReview />}
       </div>
 
       {/* Buttons */}
@@ -92,9 +94,9 @@ function Stepper() {
         <button
           onClick={nextStep}
           disabled={currentStep === steps.length - 1}
-          className="px-6 py-2 bg-blue-900 text-white rounded"
+          className="px-6 py-2 bg-green-600 text-white rounded"
         >
-          {currentStep === steps.length - 1 ? "Finish" : "Next"}
+          {currentStep === steps.length - 1 ? "Save Course" : "Next"}
         </button>
       </div>
     </div>
@@ -102,7 +104,5 @@ function Stepper() {
 }
 
 // const CourseForm = () => <div>basic form</div>;
-const Quiz = () => <div>👉 Quiz Form</div>;
-const Review = () => <div>👉 Review & Submit</div>;
 
 export default Stepper;
