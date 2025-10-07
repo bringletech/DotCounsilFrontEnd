@@ -10,7 +10,7 @@ import {
   progressBarOptions,
   convProgressBarData,
 } from "../constants/constants";
-import FilterExportCard from "../components/analytics/Filterexports";
+import FilterExportCard from "../components/analytics/FilterExports";
 import ChartCard from "../utils/chart-config";
 
 function Analytics() {
