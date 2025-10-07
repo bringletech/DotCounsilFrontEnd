@@ -1,52 +1,46 @@
-import { useState } from 'react'
-import SideBar from './components/navbars/SideBar'
-import HeaderBar from './components/navbars/HeaderBar'
-import Index from './components/ui/Layout'
-
-import Hero from './components/dashboard/Hero'
-import DashCardSmall from './components/dashboard/DashCardSmall'
-
-
+import Layout from "./components/ui/Layout";
+import Dashboard from "./pages/Dashboard";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Employee from "./pages/Employee";
+import CouponCode from "./pages/CouponCode";
+import CourseList from "./pages/CourseList";
+import EmailCampaign from "./pages/EmailCampaign";
+import Sales from "./pages/Sales";
+import Attendance from "./pages/Attendance";
+import CreateCourse from "./pages/CreateCourse";
+import Login from "./components/Login";
+import AdminLogin from "./pages/AdminLogin";
+import Analytics from "./pages/Analytics";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import UsersTable from "./components/UsersTable";
+import Add_Emp_Form from "./components/employee/Add_Emp_Form";
 
 function App() {
- 
-   let cardDetail=[{
-    digits:2000,
-    title:"total user"
-   },
-  {
-    digits:2000,
-    title:"Active user"
-   },
-  {
-    digits:2000,
-    title:"total courses"
-   },
-  {
-    digits:2000,
-    title:"revenue"
-   }]
-
   return (
-    <>
-       <Index />
-       <div className='absolute top-[15%] left-[23%] pr-7 bg-[#F6F6F6] '>
-          <Hero></Hero>
-
-          <div className="overveiw mt-10">
-            <h1 className='my-10 font-bold text-2xl '>over view</h1>
-            <div className="cards flex gap-2">
-                       {
-                        cardDetail.map((obj)=><DashCardSmall {...obj}></DashCardSmall>)
-                        }
-            </div>
-         
-          </div>
-        
-       </div>
-
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/employee" element={<Employee />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/couponcode" element={<CouponCode />} />
+            <Route path="/courselist" element={<CourseList />} />
+            <Route path="/emailcampaign" element={<EmailCampaign />} />
+            <Route path="/sales" element={<Sales />} />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/createcourse" element={<CreateCourse />} />
+            <Route path="/userstable" element={<UsersTable />} />
+            <Route path="/add-employee" element={<Add_Emp_Form />} />
+            <Route index element={<Navigate to="/dashboard" replace />} />
+          </Route>
+        </Route>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
