@@ -24,7 +24,7 @@ const useSendSalesFilter = (filters) => {
         });
 
         console.log("Filtered sales:", response.data.data.data);
-        setData(response.data.data || []);
+        setData(response.data.data.data || []);
         setError(null);
       } catch (err) {
         console.error("Filter API Error:", err);

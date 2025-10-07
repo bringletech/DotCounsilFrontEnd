@@ -1,24 +1,16 @@
 import React, { useState } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import useGetCourses from "../../hooks/api/useGetCourses";
-import useSendSalesFilter from "../../hooks/api/useSendSalesFilter";
 
-const SalesContainer = ({ children }) => {
+const SalesContainer = ({ children, onFilter }) => {
   const [filters, setFilters] = useState({
     search: "",
     course: "",
     startDate: "",
     endDate: "",
   });
-//branch test
-//branch test 
-  // This state will trigger the hook when updated
-  const [activeFilters, setActiveFilters] = useState(null);
 
   const { courses } = useGetCourses();
-
-  // Call the hook with activeFilters
-  const { data, loading, error } = useSendSalesFilter(activeFilters);
 
   const handleClear = () => {
     setFilters({
@@ -27,11 +19,11 @@ const SalesContainer = ({ children }) => {
       startDate: "",
       endDate: "",
     });
+    if (onFilter) onFilter(null); // reset filters in parent
   };
 
   const handleFilter = () => {
-    // Update activeFilters to trigger the hook
-    setActiveFilters(filters);
+    if (onFilter) onFilter(filters); // send filters to parent
   };
 
   return (
