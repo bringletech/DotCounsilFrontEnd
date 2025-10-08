@@ -61,14 +61,18 @@ const SalesContainer = ({ children, onFilter }) => {
           <input
             type="date"
             value={filters.startDate}
-            onChange={(e) => setFilters({ ...filters, startDate: e.target.value })}
+            onChange={(e) =>
+              setFilters({ ...filters, startDate: e.target.value })
+            }
             className="border px-3 py-1 rounded-md text-sm"
           />
 
           <input
             type="date"
             value={filters.endDate}
-            onChange={(e) => setFilters({ ...filters, endDate: e.target.value })}
+            onChange={(e) =>
+              setFilters({ ...filters, endDate: e.target.value })
+            }
             className="border px-3 py-1 rounded-md text-sm"
           />
         </div>
@@ -88,12 +92,6 @@ const SalesContainer = ({ children, onFilter }) => {
             Filter
           </button>
         </div>
-      </div>
-
-      {/* Sales Info */}
-      <div className="flex items-center gap-2 mb-4 text-gray-700">
-        <FiShoppingCart className="text-xl text-red-500" />
-        <span className="font-semibold">Total Sales: 4</span>
       </div>
 
       {/* Children remain untouched */}

@@ -169,22 +169,8 @@ export const paymentList = [
     course: "React for Beginners",
     price: "$199",
     salesAttribution: "Website",
-  },
-  {
-    paymentDate: "2025-09-21",
-    dotNumber: "DOT67890",
-    customerName: "Ananya Verma",
-    course: "Advanced Node.js",
-    price: "$249",
-    salesAttribution: "Agent - A101",
-  },
-  {
-    paymentDate: "2025-09-22",
-    dotNumber: "DOT54321",
-    customerName: "Karan Mehta",
-    course: "Fullstack MERN",
-    price: "$399",
-    salesAttribution: "Referral",
+    companyName: "dotcouncil",
+    email: "test@mail.com",
   },
 ];
 
