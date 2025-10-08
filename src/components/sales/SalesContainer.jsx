@@ -81,13 +81,13 @@ const SalesContainer = ({ children, onFilter }) => {
         <div className="flex justify-end gap-2 mb-4">
           <button
             onClick={handleClear}
-            className="px-4 py-1 border rounded-md bg-white text-black text-sm"
+            className="px-4 py-1 border cursor-pointer rounded-md bg-white text-black text-sm"
           >
             Clear
           </button>
           <button
             onClick={handleFilter}
-            className="px-4 py-1 border rounded-md bg-red-600 text-white text-sm"
+            className="px-4 py-1 border rounded-md cursor-pointer bg-red-600 text-white text-sm"
           >
             Filter
           </button>

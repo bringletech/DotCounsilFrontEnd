@@ -167,7 +167,7 @@ const Add_Emp_Form = () => {
       <button
         type="submit"
         disabled={loading}
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+        className="bg-blue-500 cursor-pointer text-white px-4 py-2 rounded mt-4"
       >
         {loading ? "Creating..." : "Create Admin"}
       </button>

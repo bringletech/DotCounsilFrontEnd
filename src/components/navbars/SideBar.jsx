@@ -45,7 +45,7 @@ function SideBar() {
               logout();
               navigate("/login");
             }}
-            className="bg-[#1E40AF] w-[150px] h-[40px] text-white rounded-sm m-auto"
+            className="bg-[#1E40AF] w-[150px] cursor-pointer h-[40px] text-white rounded-sm m-auto"
           >
             logout
           </button>

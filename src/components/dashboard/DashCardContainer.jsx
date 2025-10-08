@@ -1,6 +1,7 @@
 import React from 'react';
 import { cardDetail, AnalyticscardDetail } from '../../constants/constants';
 import DashCardSmall from './DashCardSmall';
+import SkeletonCard from '../ui/SkeletonCard';
 
 const DASH_CARD_KEYS = {
   'Total Users': 'totalUsers',
@@ -16,8 +17,19 @@ const ANALYTICS_CARD_KEYS = {
   'Avg Revenue User': 'AvgRevenueUser',
 };
 
-function DashCardContainer({ type, stats = {}, analysisStats = {} }) {
+function DashCardContainer({ type, stats = {}, analysisStats = {}, isLoading = false }) {
   const cards = type === 'dash' ? cardDetail : AnalyticscardDetail;
+
+  // Show skeleton loading state
+  if (isLoading) {
+    return (
+      <div className="cards w-full flex gap-2">
+        {cards.map((_, idx) => (
+          <SkeletonCard key={idx} />
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="cards w-full flex gap-2">

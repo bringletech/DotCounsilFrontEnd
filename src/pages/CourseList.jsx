@@ -11,7 +11,7 @@ function CourseList() {
         subHeading={"create,manage and publish your online courses"}
         btnTxt={"+ Create Course"}
         link={"/createcourse"}
-        className={"mt-20"}
+        className={""}
       ></SubHeader>
 
       <CourseCardContainer></CourseCardContainer>

@@ -67,10 +67,10 @@ const FilterExportCard = () => {
             />
           </div>
           <div className="flex justify-between mt-2">
-            <button className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded text-sm">
+            <button className="flex cursor-pointer items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded text-sm">
               <MdOutlineFileDownload /> Export
             </button>
-            <button className="px-3 py-1 bg-gray-400 text-white rounded text-sm">
+            <button className="px-3 py-1 cursor-pointer bg-gray-400 text-white rounded text-sm">
               Clear
             </button>
           </div>

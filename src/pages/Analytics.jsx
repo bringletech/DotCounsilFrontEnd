@@ -20,9 +20,9 @@ function Analytics() {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, nihil.
       </Hero>
 
-      <div className="mt-10">
-        <FilterExportCard></FilterExportCard>
-      </div>
+        {/* <div className="mt-10">
+          <FilterExportCard></FilterExportCard>
+        </div> */}
 
       <div className="mt-10">
         <DashCardContainer

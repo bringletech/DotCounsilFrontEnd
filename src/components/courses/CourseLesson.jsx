@@ -68,7 +68,7 @@ const CourseLesson = ({ moduleId }) => {
 
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+            className="flex items-center gap-2 bg-blue-60 cursor-pointer text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
           >
             <span className="text-xl">+</span>
             Create Lesson
@@ -89,7 +89,7 @@ const CourseLesson = ({ moduleId }) => {
             {/* Close Button */}
             <button
               onClick={() => setShowForm(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+              className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700"
             >
               ✕
             </button>
@@ -185,14 +185,14 @@ const CourseLesson = ({ moduleId }) => {
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="px-4 py-2 rounded-md border text-gray-600 hover:bg-gray-100"
+                  className="px-4 py-2 rounded-md border cursor-pointer text-gray-600 hover:bg-gray-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={!moduleId || loading}
-                  className={`px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 ${
+                  className={`px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white hover:bg-blue-700 ${
                     (!moduleId || loading) ? 'opacity-60 cursor-not-allowed' : ''
                   }`}
                 >

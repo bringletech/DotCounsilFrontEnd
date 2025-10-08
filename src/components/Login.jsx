@@ -113,7 +113,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-2 rounded transition-colors ${
+            className={`w-full py-2 cursor-pointer rounded transition-colors ${
               loading
                 ? "bg-gray-400 text-white cursor-not-allowed"
                 : "bg-blue-600 text-white hover:bg-blue-700"

@@ -85,14 +85,14 @@ function Stepper() {
         <button
           onClick={prevStep}
           disabled={currentStep === 0}
-          className="px-6 py-2 bg-gray-300 rounded disabled:opacity-50"
+          className="px-6 py-2 bg-gray-300 cursor-pointer rounded disabled:opacity-50"
         >
           Back
         </button>
         <button
           onClick={nextStep}
           disabled={currentStep === steps.length - 1}
-          className="px-6 py-2 bg-blue-900 text-white rounded"
+          className="px-6 py-2 bg-blue-900 cursor-pointer text-white rounded"
         >
           {currentStep === steps.length - 1 ? "Finish" : "Next"}
         </button>

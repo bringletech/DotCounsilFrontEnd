@@ -44,7 +44,7 @@ const CourseModules = ({ courseId, onModuleCreated }) => {
         </div>
         <button
           onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+          className="flex items-center gap-2 cursor-pointer bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
         >
           <span className="text-xl">+</span>
           Add Module
@@ -67,7 +67,7 @@ const CourseModules = ({ courseId, onModuleCreated }) => {
             {/* Close Button */}
             <button
               onClick={() => setShowForm(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+              className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700"
             >
               ✕
             </button>
@@ -130,14 +130,14 @@ const CourseModules = ({ courseId, onModuleCreated }) => {
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="px-4 py-2 rounded-md border text-gray-600 hover:bg-gray-100"
+                  className="px-4 py-2 cursor-pointer rounded-md border text-gray-600 hover:bg-gray-100"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={!courseId || loading}
-                  className={`px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 ${
+                  className={`px-4 py-2 rounded-md cursor-pointer bg-blue-600 text-white hover:bg-blue-700 ${
                     (!courseId || loading) ? 'opacity-60 cursor-not-allowed' : ''
                   }`}
                 >

@@ -148,7 +148,7 @@ const CourseForm = ({ onCreated }) => {
           <button
             type="submit"
             disabled={loading}
-            className={`bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 ${
+            className={`bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-blue-700 ${
               loading ? "opacity-60 cursor-not-allowed" : ""
             }`}
           >

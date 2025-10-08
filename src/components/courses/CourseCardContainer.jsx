@@ -39,20 +39,27 @@ function CourseCardContainer() {
     }
   };
 
-  if (loading) return <p className="p-10">Loading courses...</p>;
   if (error) return <p className="p-10 text-red-500">Error: {error.message}</p>;
 
   return (
     <div className="w-full h-auto bg-transparent flex p-10 justify-center flex-wrap gap-10">
-      {data && data.length > 0 ? (
+      {loading ? (
+        // Show skeleton cards while loading
+        Array.from({ length: 6 }).map((_, index) => (
+          <CourseCard key={`skeleton-${index}`} isLoading={true} />
+        ))
+      ) : data && data.length > 0 ? (
+        // Show actual course cards
         data.map((course) => (
           <CourseCard
             key={course.id}
             course={course}
-            onDelete={handleDeleteClick} // pass click handler
+            onDelete={handleDeleteClick}
+            isLoading={false}
           />
         ))
       ) : (
+        // Show no courses message
         <p>No courses found</p>
       )}
 
@@ -66,13 +73,13 @@ function CourseCardContainer() {
             <div className="flex justify-center gap-2">
               <button
                 onClick={() => setShowConfirm(false)}
-                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 text-xl"
+                className="px-4 py-2 bg-gray-300 cursor-pointer rounded hover:bg-gray-400 text-xl"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmDelete}
-                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 text-xl"
+                className="px-4 py-2 cursor-pointer bg-red-500 text-white rounded hover:bg-red-600 text-xl"
               >
                 Ok
               </button>
