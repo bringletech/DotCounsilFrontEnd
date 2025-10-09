@@ -1,3 +1,4 @@
+// components/ui/List.jsx
 import React from "react";
 
 function List({ Data = [], isLoading = false }) {
@@ -39,7 +40,7 @@ function List({ Data = [], isLoading = false }) {
                           : colIndex === 1
                           ? "w-32" // Second column
                           : colIndex === 2
-                          ? "w-16" // Third column (buttons)
+                          ? "w-16" // Third column
                           : colIndex === 3
                           ? "w-20" // Fourth column
                           : "w-28" // Last column
@@ -60,14 +61,7 @@ function List({ Data = [], isLoading = false }) {
     return <p className="p-4 text-gray-500">No data found.</p>;
   }
 
-  const titles = Object.keys(Data[0]);
-
-  const copyUrl = (url) => {
-    navigator.clipboard
-      .writeText(url)
-      .then(() => alert("Copied!"))
-      .catch(() => alert("Failed to copy"));
-  };
+  const titles = Object.keys(Data[0]).filter((key) => !key.startsWith("_")); // Exclude hidden fields
 
   return (
     <div className="w-full overflow-x-auto bg-white rounded-xl">
@@ -93,13 +87,20 @@ function List({ Data = [], isLoading = false }) {
                     <span className="text-blue-600 cursor-pointer hover:underline">
                       View
                     </span>
-                  ) : col === "referenceUrl" || col === "code" ? (
-                    <button
-                      onClick={() => copyUrl(row[col])}
-                      className="bg-blue-600 text-xs rounded-2xl h-[30px] w-[70px] text-white cursor-pointer"
+                  ) : col === "status" ? (
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        row[col] === "COMPLETED" || row[col] === "active"
+                          ? "bg-green-100 text-green-800"
+                          : row[col] === "PENDING" || row[col] === "pending"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : row[col] === "FAILED" || row[col] === "inactive"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-gray-100 text-gray-800"
+                      }`}
                     >
-                      copy
-                    </button>
+                      {row[col]}
+                    </span>
                   ) : (
                     row[col]
                   )}

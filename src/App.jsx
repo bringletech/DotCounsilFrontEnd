@@ -14,6 +14,7 @@ import Analytics from "./pages/Analytics";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import UsersTable from "./components/UsersTable";
 import Add_Emp_Form from "./components/employee/Add_Emp_Form";
+import UCRSales from "./pages/UCRSales";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/courselist" element={<CourseList />} />
             <Route path="/emailcampaign" element={<EmailCampaign />} />
             <Route path="/sales" element={<Sales />} />
+            <Route path="/ucrsales" element={<UCRSales />} />
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/createcourse" element={<CreateCourse />} />
             <Route path="/userstable" element={<UsersTable />} />
