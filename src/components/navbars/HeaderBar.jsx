@@ -44,7 +44,7 @@ function HeaderBar({ title, link }) {
 
   return (
     <>
-      <div className="header  w-full flex justify-between items-center px-5 h-[80px] fixed bg-[#EFEFEF] z-[100] ">
+      <div className="header  w-full flex justify-between items-center px-5 h-[80px] fixed bg-[#EFEFEF] z-20 ">
         <div className="flex items-center h-[63px]">
           {TIMEZONES.map((tz) => (
             <span key={tz.label}>

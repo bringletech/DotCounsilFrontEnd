@@ -18,6 +18,7 @@ export const menuItems = [
   { icon: Settings, label: "Analytics", link: "/analytics" },
   // { icon: Ticket, label: "Coupon Code", link: "/couponcode" },
   { icon: ShoppingCart, label: "Sales", link: "/sales" },
+  { icon: ShoppingCart, label: "UCR Sales", link: "/ucrsales" },
   // { icon: Calendar, label: "My Attendance", link: "/attendance" },
 ];
 

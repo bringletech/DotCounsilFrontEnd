@@ -182,7 +182,7 @@ function Dashboard() {
       <div className="overveiw mt-10">
         <h1 className="my-10 font-bold text-2xl capitalize">overview</h1>
 
-        <DashCardContainer type="dash" stats={stats} />
+        <DashCardContainer type="dash" stats={stats} isLoading={loading} />
 
         <div className="ml-5 mt-5">
           {error && (
@@ -191,53 +191,49 @@ function Dashboard() {
             </div>
           )}
 
-          {loading ? (
-            <div className="flex items-center justify-center py-20 text-gray-500">
-              Loading dashboard data...
+          <div className="flex w-full flex-wrap gap-4 mt-5 pb-5">
+            <div className="w-full lg:w-[48%]">
+              <ChartCard
+                type="line"
+                title="Revenue Trends (30 days)"
+                data={revenueChartData}
+                options={createLineOptions()}
+                isLoading={loading}
+              />
             </div>
-          ) : (
-            <>
-              <div className="flex w-full flex-wrap gap-4 mt-5 pb-5">
-                <div className="w-full lg:w-[48%]">
-                  <ChartCard
-                    type="line"
-                    title="Revenue Trends (30 days)"
-                    data={revenueChartData}
-                    options={createLineOptions()}
-                  />
-                </div>
-                <div className="w-full lg:w-[48%]">
-                  <ChartCard
-                    type="bar"
-                    title="Course Enrollments (6 months)"
-                    data={enrollmentBarData}
-                    options={createBarOptions()}
-                  />
-                </div>
-              </div>
+            <div className="w-full lg:w-[48%]">
+              <ChartCard
+                type="bar"
+                title="Course Enrollments (6 months)"
+                data={enrollmentBarData}
+                options={createBarOptions()}
+                isLoading={loading}
+              />
+            </div>
+          </div>
 
-              <div className="flex w-full flex-wrap gap-4 mt-5 pb-5">
-                <div className="w-full lg:w-[48%]">
-                  <ChartCard
-                    type="doughnut"
-                    title="Recent Activities (24h)"
-                    data={recentActivitiesData}
-                    options={defaultChartOptions}
-                  />
-                </div>
-                <div className="w-full lg:w-[48%]">
-                  <ChartCard
-                    type="bar"
-                    title="Top Performing Courses (30 days)"
-                    data={topCoursesData}
-                    options={createHorizontalBarOptions(topCoursesMax)}
-                  />
-                </div>
-              </div>
+          <div className="flex w-full flex-wrap gap-4 mt-5 pb-5">
+            <div className="w-full lg:w-[48%]">
+              <ChartCard
+                type="doughnut"
+                title="Recent Activities (24h)"
+                data={recentActivitiesData}
+                options={defaultChartOptions}
+                isLoading={loading}
+              />
+            </div>
+            <div className="w-full lg:w-[48%]">
+              <ChartCard
+                type="bar"
+                title="Top Performing Courses (30 days)"
+                data={topCoursesData}
+                options={createHorizontalBarOptions(topCoursesMax)}
+                isLoading={loading}
+              />
+            </div>
+          </div>
 
-              <QuickActionsCard title="quick links :" />
-            </>
-          )}
+          <QuickActionsCard title="quick links :" isLoading={loading} />
         </div>
       </div>
     </>

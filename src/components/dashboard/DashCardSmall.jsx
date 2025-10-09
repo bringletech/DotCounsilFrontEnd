@@ -1,5 +1,5 @@
 import React from "react";
-import { FaBeer } from "react-icons/fa"; // Example icon
+import { FaBeer } from "react-icons/fa";
 
 const DashCardSmall = ({ isLoading = false, ...obj }) => {
   const Icon = obj.icon;
