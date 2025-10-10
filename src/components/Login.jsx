@@ -123,7 +123,7 @@ const Login = () => {
           </button>
         </form>
         <p className="mt-4 text-sm text-gray-500 text-center">
-          &copy; Dot Counsil
+          &copy; Dot Council
         </p>
       </div>
     </div>
